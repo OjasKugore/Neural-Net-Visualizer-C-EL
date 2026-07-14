@@ -3,7 +3,6 @@
 float randf(void) {
     return (((float)rand() / (float)RAND_MAX) - 0.5f) * 2.0f;
 }
-
 float sigmoid(float x) {
     if (x >= 0.0f)
         return 1.0f / (1.0f + expf(-x));

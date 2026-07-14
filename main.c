@@ -67,4 +67,16 @@ int main(void) {
                    (float)correct / SAMPLES * 100.0f);
         }
     }
+
+    printf("\nFinal Results:\n");
+    for (int s = 0; s < SAMPLES; s++) {
+        float *x = inputs[s];
+        float  y = labels[s];
+        layer1_forward(&l1, x);
+        layer2_forward(&l2, l1.out);
+        output_forward(&out, l2.out);
+        printf("Input: [%.0f, %.0f, %.0f, %.0f] Expected: %.0f Actual: %.4f %s\n",
+               x[0], x[1], x[2], x[3], y, out.out[0],
+               ((out.out[0] >= 0.5f && y == 1.0f) || (out.out[0] < 0.5f && y == 0.0f)) ? "OK" : "FAIL");
+    }
 }
